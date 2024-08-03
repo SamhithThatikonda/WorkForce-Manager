@@ -27,15 +27,12 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDept(AddDeptModel model)
         {
-            if (ModelState.IsValid)
-            {
                 var department = new DepartmentClass
                 {
                     Dept_Name = model.Dept_Name
                 };
                 await _dbContext.Departments.AddAsync(department);
                 await _dbContext.SaveChangesAsync();
-            }
             return RedirectToAction("ListDept", "Dept");
         }
 

@@ -27,9 +27,6 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEmployee(AddEmployeeModel model)
         {
-            Console.WriteLine("AddEmployee");
-            if (ModelState.IsValid)
-            {
                 var employee = new EmployeeClass
                 {
                     First_Name = model.First_Name,
@@ -38,7 +35,7 @@ namespace Application.Controllers
                 };
                 await _dbContext.Employees.AddAsync(employee);
                 await _dbContext.SaveChangesAsync();
-            }
+            
             return RedirectToAction("ListEmployee", "Employee");
         }
 
