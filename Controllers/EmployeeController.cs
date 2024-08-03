@@ -48,5 +48,30 @@ namespace Application.Controllers
             var allemployees = await _dbContext.Employees.ToListAsync();
             return View(allemployees);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditEmployee(int id)
+        {
+            var employee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditEmployee(EmployeeClass employee)
+        {
+            var employeeInDb = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == employee.Emp_Id);
+            if (employeeInDb != null){
+                employeeInDb.First_Name = employee.First_Name;
+                employeeInDb.Last_Name = employee.Last_Name;
+                employeeInDb.Dept_Id = employee.Dept_Id;
+                await _dbContext.SaveChangesAsync();
+            }
+
+            return RedirectToAction("ListEmployee", "Employee");
+        }
     }
 }
