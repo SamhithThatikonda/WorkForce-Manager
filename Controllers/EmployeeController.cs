@@ -73,17 +73,29 @@ namespace Application.Controllers
             {
                 return NotFound();
             }
-            return View(employee);
+        
+            var viewModel = new EditEmployeeViewModel
+            {
+                Employees = employee,
+                Departments = await _dbContext.Departments.ToListAsync()
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditEmployee(EmployeeClass employee)
+        public async Task<IActionResult> EditEmployee(EditEmployeeViewModel employee)
         {
-            var employeeInDb = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == employee.Emp_Id);
+            if (employee == null || employee.Employees == null)
+                {
+                    return BadRequest("Invalid employee data.");
+                }
+
+            var employeeInDb = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == employee.Employees.Emp_Id);
             if (employeeInDb != null){
-                employeeInDb.First_Name = employee.First_Name;
-                employeeInDb.Last_Name = employee.Last_Name;
-                employeeInDb.Dept_Id = employee.Dept_Id;
+                employeeInDb.First_Name = employee.Employees.First_Name;
+                employeeInDb.Last_Name = employee.Employees.Last_Name;
+                employeeInDb.Dept_Id = employee.Employees.Dept_Id;
                 await _dbContext.SaveChangesAsync();
             }
 
