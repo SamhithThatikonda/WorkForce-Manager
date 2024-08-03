@@ -20,19 +20,25 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddEmployee()
+        public async Task<IActionResult> AddEmployee()
         {
-            return View();
+            var viewModel = new AddEmployeeViewModel
+            {
+                Employee = new Application.Models.Entities.Employee.AddEmployeeModel(),
+                Departments = await _dbContext.Departments.ToListAsync()
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(AddEmployeeModel model)
+        public async Task<IActionResult> AddEmployee(AddEmployeeViewModel model)
         {
+
                 var employee = new EmployeeClass
                 {
-                    First_Name = model.First_Name,
-                    Last_Name = model.Last_Name,
-                    Dept_Id = model.Dept_Id
+                    First_Name = model.Employee.First_Name,
+                    Last_Name = model.Employee.Last_Name,
+                    Dept_Id = model.Employee.Dept_Id
                 };
                 await _dbContext.Employees.AddAsync(employee);
                 await _dbContext.SaveChangesAsync();
@@ -42,7 +48,7 @@ namespace Application.Controllers
 
                 var salary = new SalaryClass
                 {
-                    SalaryAmount = model.SalaryAmount,
+                    SalaryAmount = model.Employee.SalaryAmount,
                     Emp_Id = employee.Emp_Id
                 };
 
