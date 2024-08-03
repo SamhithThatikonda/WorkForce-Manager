@@ -27,6 +27,7 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEmployee(AddEmployeeModel model)
         {
+            Console.WriteLine("AddEmployee");
             if (ModelState.IsValid)
             {
                 var employee = new EmployeeClass

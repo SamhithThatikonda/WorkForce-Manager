@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Application.Models.Entities.Department;
 
 
 namespace Application.Models.Entities.Employee
@@ -17,6 +18,6 @@ public class AddEmployeeModel
 
     [Required]
     public int Dept_Id { get; set; }
-    // public Department DepartmentObject { get; set; }
+    public DepartmentClass DepartmentObject { get; set; }
 }
 }

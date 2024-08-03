@@ -18,6 +18,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/samhith/Projects/Application
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/samhith/Projects/Application/Views/Dept/AddDept.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwdC9BZGREZXB0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/samhith/Projects/Application/Views/Dept/EditDept.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwdC9FZGl0RGVwdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/samhith/Projects/Application/Views/Dept/ListDept.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwdC9MaXN0RGVwdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/samhith/Projects/Application/Views/Employee/AddEmployee.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvQWRkRW1wbG95ZWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

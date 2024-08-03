@@ -1,0 +1,27 @@
+@{}
+
+@model List<Application.Models.Entities.Department.DepartmentClass>
+
+<h1> All Departments </h1>
+
+<table class ="table">
+    <thead>
+        <tr>
+            <th>Department Id</th>
+            <th> Department Name </th>
+            <th> <a class = "btn btn-primary" asp-controller = "Dept" asp-action = "AddDept"> Add </a> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var deptrow in Model)
+        {
+            <tr>
+                <td> @deptrow.Dept_Id </td>
+                <td> @deptrow.Dept_Name </td>
+                <td> 
+                    <a class = "btn btn-primary" asp-controller = "Dept" asp-action = "EditDept" asp-route-id = "@deptrow.Dept_Id"> Edit </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
