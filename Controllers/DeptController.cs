@@ -88,5 +88,23 @@ namespace Application.Controllers
 
             return RedirectToAction("ListDept", "Dept");
         }   
+
+        [HttpGet]
+        public IActionResult AddDeptFromEmployee()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddDeptFromEmployee(AddDeptModel model)
+        {
+                var department = new DepartmentClass
+                {
+                    Dept_Name = model.Dept_Name
+                };
+                await _dbContext.Departments.AddAsync(department);
+                await _dbContext.SaveChangesAsync();
+            return RedirectToAction("AddEmployee", "Employee");
+        }
     }
 }
