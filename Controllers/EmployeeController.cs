@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Application.Data;
+using Application.Models.Entities.Salary;
 using Application.Models.Entities.Employee;
 using Application.Models.Entities.Department;
 using Application.Models;
@@ -34,6 +35,18 @@ namespace Application.Controllers
                     Dept_Id = model.Dept_Id
                 };
                 await _dbContext.Employees.AddAsync(employee);
+                await _dbContext.SaveChangesAsync();
+
+                // Print the employee ID for the newly created row
+                Console.WriteLine($"New employee ID: {employee.Emp_Id}");
+
+                var salary = new SalaryClass
+                {
+                    SalaryAmount = model.SalaryAmount,
+                    Emp_Id = employee.Emp_Id
+                };
+
+                await _dbContext.Salaries.AddAsync(salary);
                 await _dbContext.SaveChangesAsync();
             
             return RedirectToAction("ListEmployee", "Employee");
@@ -78,6 +91,13 @@ namespace Application.Controllers
             if (employeeRemove != null)
             {
                 _dbContext.Employees.Remove(employeeRemove);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            var salaryRemove = await _dbContext.Salaries.FirstOrDefaultAsync(s => s.Emp_Id == employee.Emp_Id);
+            if (salaryRemove != null)
+            {
+                _dbContext.Salaries.Remove(salaryRemove);
                 await _dbContext.SaveChangesAsync();
             }
             return RedirectToAction("ListEmployee", "Employee");
