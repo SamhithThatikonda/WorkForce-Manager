@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Application.Models.Entities.Department;
+using Application.Models.Entities.Salary;
 
-
-namespace Application.Models.Entities
+namespace Application.Models.Entities.Employee
 {
-public class Employee
+public class EmployeeClass
 {
     [Key]
     public int Emp_Id { get; set; }
@@ -19,6 +20,6 @@ public class Employee
 
     [ForeignKey("Department")]
     public int Dept_Id { get; set; }
-    public Department DepartmentObject { get; set; }
+    public DepartmentClass DepartmentObject { get; set; }
 }
 }

@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Application.Models.Entities;
+using Application.Models.Entities.Employee;
+using Application.Models.Entities.Salary;
+using Application.Models.Entities.Department;
 
 namespace Application.Data
 {
@@ -10,16 +13,16 @@ namespace Application.Data
     {
     }
 
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<Salary> Salaries { get; set; }
-    public DbSet<Department> Departments { get; set; }
+    public DbSet<EmployeeClass> Employees { get; set; }
+    public DbSet<SalaryClass> Salaries { get; set; }
+    public DbSet<DepartmentClass> Departments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         // Configure Employee entity
-        modelBuilder.Entity<Employee>(entity =>
+        modelBuilder.Entity<EmployeeClass>(entity =>
         {
             entity.HasKey(e => e.Emp_Id);
             entity.Property(e => e.First_Name).IsRequired().HasMaxLength(100);
@@ -31,7 +34,7 @@ namespace Application.Data
         });
 
         // Configure Salary entity
-        modelBuilder.Entity<Salary>(entity =>
+        modelBuilder.Entity<SalaryClass>(entity =>
         {
             entity.HasKey(s => s.Sal_Id);
             entity.Property(s => s.SalaryAmount).IsRequired().HasColumnType("decimal(18, 2)");
@@ -42,7 +45,7 @@ namespace Application.Data
         });
 
         // Configure Department entity
-        modelBuilder.Entity<Department>(entity =>
+        modelBuilder.Entity<DepartmentClass>(entity =>
         {
             entity.HasKey(d => d.Dept_Id);
             entity.Property(d => d.Dept_Name).IsRequired().HasMaxLength(100);
