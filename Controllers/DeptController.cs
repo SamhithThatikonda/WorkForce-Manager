@@ -69,13 +69,23 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteDept(DepartmentClass department)
         {
-            // var department = await _dbContext.Departments.FirstOrDefaultAsync(d => d.Dept_Id == id);
-            // if (department == null)
-            // {
-            //     return NotFound();
-            // }
-            // _dbContext.Departments.Remove(department);
-            // await _dbContext.SaveChangesAsync();
+            
+            var deptInDb = await _dbContext.Departments.FirstOrDefaultAsync(d => d.Dept_Id == department.Dept_Id);
+            if (deptInDb == null)
+            {
+                return NotFound();
+            }
+            _dbContext.Departments.Remove(deptInDb);
+            await _dbContext.SaveChangesAsync();
+
+            var employees = await _dbContext.Employees.Where(e => e.Dept_Id == department.Dept_Id).ToListAsync();
+            foreach (var employee in employees)
+            {
+                _dbContext.Employees.Remove(employee);
+            }
+            await _dbContext.SaveChangesAsync();
+                        
+
             return RedirectToAction("ListDept", "Dept");
         }   
     }
