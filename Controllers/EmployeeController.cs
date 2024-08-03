@@ -37,9 +37,8 @@ namespace Application.Controllers
                 };
                 await _dbContext.Employees.AddAsync(employee);
                 await _dbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
             }
-            return View(model);
+            return RedirectToAction("ListEmployee", "Employee");
         }
 
         [HttpGet]
@@ -73,5 +72,17 @@ namespace Application.Controllers
 
             return RedirectToAction("ListEmployee", "Employee");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteEmployee(EmployeeClass employee)
+        {
+            var employeeRemove = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == employee.Emp_Id);
+            if (employeeRemove != null)
+            {
+                _dbContext.Employees.Remove(employeeRemove);
+                await _dbContext.SaveChangesAsync();
+            }
+            return RedirectToAction("ListEmployee", "Employee");
+        }   
     }
 }
