@@ -3,6 +3,7 @@ using Application.Models.Entities;
 using Application.Models.Entities.Employee;
 using Application.Models.Entities.Salary;
 using Application.Models.Entities.Department;
+using Application.Models.Entities.Auth;
 
 namespace Application.Data
 {
@@ -17,6 +18,7 @@ namespace Application.Data
     public DbSet<SalaryClass> Salaries { get; set; }
     public DbSet<DepartmentClass> Departments { get; set; }
 
+    public DbSet<AuthClass> Auths { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -50,6 +52,14 @@ namespace Application.Data
             entity.HasKey(d => d.Dept_Id);
             entity.Property(d => d.Dept_Name).IsRequired().HasMaxLength(100);
             entity.ToTable("DepartmentTable");
+        });
+
+        // Configure Auth entity
+        modelBuilder.Entity<AuthClass>(entity =>
+        {
+            entity.HasKey(a => a.Emp_Id);
+            entity.Property(a => a.Password).IsRequired().HasMaxLength(100);
+            entity.ToTable("AuthTable");
         });
     }
 }

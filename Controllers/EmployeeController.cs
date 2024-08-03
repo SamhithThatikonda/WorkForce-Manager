@@ -61,6 +61,7 @@ namespace Application.Controllers
         [HttpGet]
         public async Task<IActionResult> ListEmployee()
         {
+            ViewBag.loggedIn = TempData["loggedIn"];
             var allemployees = await _dbContext.Employees.ToListAsync();
             return View(allemployees);
         }

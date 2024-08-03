@@ -63,6 +63,7 @@ namespace Application.Migrations
                         principalColumn: "Emp_Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+            
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeTable_Dept_Id",
