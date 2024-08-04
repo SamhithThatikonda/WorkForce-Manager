@@ -6,10 +6,12 @@ using Application.Data;
 using Application.Models.Entities.Employee;
 using Application.Models.Entities.Department;
 using Application.Models;
-
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Application.Controllers
 {
+    [Authorize]
     public class DeptController : Controller
     {
         private readonly ApplicationDbContext _dbContext;

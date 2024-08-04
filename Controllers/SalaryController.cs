@@ -7,10 +7,13 @@ using Application.Models.Entities.Salary;
 using Application.Models.Entities.Employee;
 using Application.Models.Entities.Department;
 using Application.Models;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Application.Controllers
 {
+    [Authorize]
     public class SalaryController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -49,13 +52,5 @@ namespace Application.Controllers
 
             return RedirectToAction("ListSalary", "Salary");
         }
-
-        // public someFunction(){
-        //     // some code
-        //     if(TempData["loggedIn"] =="false"){
-        //         return RedirectToAction("Login", "Auth");
-        //     }
-        // }
-
     }
 }

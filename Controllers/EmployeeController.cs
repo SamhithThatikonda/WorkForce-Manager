@@ -7,13 +7,17 @@ using Application.Models.Entities.Salary;
 using Application.Models.Entities.Employee;
 using Application.Models.Entities.Department;
 using Application.Models;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Application.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+
         public EmployeeController(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
@@ -33,7 +37,6 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEmployee(AddEmployeeViewModel model)
         {
-
                 var employee = new EmployeeClass
                 {
                     First_Name = model.Employee.First_Name,
@@ -61,14 +64,13 @@ namespace Application.Controllers
         [HttpGet]
         public async Task<IActionResult> ListEmployee()
         {
-            ViewBag.loggedIn = TempData["loggedIn"];
             var allemployees = await _dbContext.Employees.ToListAsync();
             return View(allemployees);
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditEmployee(int id)
-        {
+        public async Task<IActionResult> EditEmployee(int id)  
+        {        
             var employee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == id);
             if (employee == null)
             {
@@ -80,7 +82,6 @@ namespace Application.Controllers
                 Employees = employee,
                 Departments = await _dbContext.Departments.ToListAsync()
             };
-
             return View(viewModel);
         }
 
@@ -107,6 +108,7 @@ namespace Application.Controllers
         public async Task<IActionResult> DeleteEmployee(EmployeeClass employee)
         {
             var employeeRemove = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == employee.Emp_Id);
+            Console.WriteLine($"Employee ID: {employee.Emp_Id}");
             if (employeeRemove != null)
             {
                 _dbContext.Employees.Remove(employeeRemove);
@@ -120,6 +122,7 @@ namespace Application.Controllers
                 await _dbContext.SaveChangesAsync();
             }
             return RedirectToAction("ListEmployee", "Employee");
-        }   
+        }
+
     }
 }

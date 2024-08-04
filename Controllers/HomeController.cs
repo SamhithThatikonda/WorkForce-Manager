@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Application.Models;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Application.Controllers;
 
@@ -16,7 +18,9 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         // ViewBag.loggedIn == "true";
-        return RedirectToAction("Login", "Auth");
+        // return RedirectToAction("Login", "Auth");
+        return View();
+
     }
 
     public IActionResult Privacy()

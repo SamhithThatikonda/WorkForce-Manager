@@ -1,7 +1,10 @@
 using Application.Models.Entities.Auth;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Application.Data;
 using Application.Models;
 using Application.Models.Entities.Employee;
@@ -20,18 +23,16 @@ namespace Application.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-
             if (TempData["Message"] != null){
                 ViewBag.Message = TempData["Message"];
             }
-            ViewBag.loggedIn = "false";
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(AuthClass model)
         {
-            TempData["loggedIn"] = "false";
+            // TempData["loggedIn"] = "false";
             var employeepresent = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == model.Emp_Id);
             if (employeepresent == null)
             {
@@ -52,15 +53,31 @@ namespace Application.Controllers
                 return RedirectToAction("Login", "Auth");
             }
             // ViewBag.loggedIn = "true";
-            TempData["loggedIn"] = "true";
-            return RedirectToAction("ListEmployee", "Employee");
+            // TempData["loggedIn"] = "true";
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Emp_Id.ToString())
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
+            {
+                AllowRefresh = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                IsPersistent = true
+            };
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
+
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public IActionResult Register()
         {
-            if (TempData["Message"] != null)
-            {
+            if (TempData["Message"] != null){
                 ViewBag.Message = TempData["Message"];
             }
             return View();
@@ -100,8 +117,7 @@ namespace Application.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            TempData["loggedIn"] = "false";
-            TempData["Message"] = "Logged Out";
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Auth");
         }
     } 
