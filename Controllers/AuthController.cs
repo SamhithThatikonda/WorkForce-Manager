@@ -36,14 +36,12 @@ namespace Application.Controllers
             if (employeepresent == null)
             {
                 TempData["Message"] = "Employee not found";
-                Console.WriteLine("val:",TempData);
                 return RedirectToAction("Login", "Auth");
             }
             var userpresent = await _dbContext.Auths.FirstOrDefaultAsync(u => u.Emp_Id == model.Emp_Id);
             if (userpresent == null)
             {
                 TempData["Message"] = "Register First";
-                Console.WriteLine("val2:",TempData);
                 return RedirectToAction("Register", "Auth");
             }
 
@@ -51,10 +49,9 @@ namespace Application.Controllers
             if (user == null)
             {
                 TempData["Message"] = "Invalid Password";
-                Console.WriteLine("val3:",TempData);
                 return RedirectToAction("Login", "Auth");
             }
-            ViewBag.loggedIn = "true";
+            // ViewBag.loggedIn = "true";
             TempData["loggedIn"] = "true";
             return RedirectToAction("ListEmployee", "Employee");
         }
@@ -72,6 +69,18 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(AuthClass model)
         {
+            var employeepresent = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == model.Emp_Id);
+            if (employeepresent == null)
+            {
+                TempData["Message"] = "Employee not found";
+                return RedirectToAction("Login", "Auth");
+            }
+            var userpresent = await _dbContext.Auths.FirstOrDefaultAsync(u => u.Emp_Id == model.Emp_Id);
+            if (userpresent != null)
+            {
+                TempData["Message"] = "User already exists";
+                return RedirectToAction("Login", "Auth");
+            }
             var user = new AuthClass
             {
                 Emp_Id = model.Emp_Id,

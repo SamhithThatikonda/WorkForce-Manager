@@ -50,5 +50,12 @@ namespace Application.Controllers
             return RedirectToAction("ListSalary", "Salary");
         }
 
+        // public someFunction(){
+        //     // some code
+        //     if(TempData["loggedIn"] =="false"){
+        //         return RedirectToAction("Login", "Auth");
+        //     }
+        // }
+
     }
 }
