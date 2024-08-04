@@ -19,11 +19,13 @@
     <div class = "mt-3">
         <label class = "form-label">First Name</label>
         <input type = "text" class = "formal-control" asp-for="Employees.First_Name">
+        <span asp-validation-for="Employees.First_Name" class="text-danger"></span>
     </div>
 
     <div class = "mt-3">
         <label class = "form-label">Last Name</label>
         <input type = "text" class = "formal-control" asp-for="Employees.Last_Name">
+        <span asp-validation-for="Employees.Last_Name" class="text-danger"></span>
     </div>
 
 
@@ -46,6 +48,12 @@
     </div>
 </form>
 }
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
 
 

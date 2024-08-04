@@ -7,9 +7,11 @@ namespace Application.Models.Entities.Auth
     public class AuthClass
     {
         [Key]
+        [Required(ErrorMessage = "Please enter your Employee ID")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Use numbers only please")]
         public int Emp_Id { get; set; }
 
-        [Required]
+        [Required (ErrorMessage = "Please enter your Password")]
         public string Password { get; set; }
 
     }

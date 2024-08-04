@@ -17,10 +17,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        // ViewBag.loggedIn == "true";
-        // return RedirectToAction("Login", "Auth");
         return View();
-
     }
 
     public IActionResult Privacy()

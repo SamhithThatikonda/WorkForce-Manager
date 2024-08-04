@@ -32,7 +32,7 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AuthClass model)
         {
-            // TempData["loggedIn"] = "false";
+
             var employeepresent = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == model.Emp_Id);
             if (employeepresent == null)
             {
@@ -52,8 +52,7 @@ namespace Application.Controllers
                 TempData["Message"] = "Invalid Password";
                 return RedirectToAction("Login", "Auth");
             }
-            // ViewBag.loggedIn = "true";
-            // TempData["loggedIn"] = "true";
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Emp_Id.ToString())

@@ -10,8 +10,9 @@ public class DepartmentClass
     [Key]
     public int Dept_Id { get; set; }
 
-    [Required]
+    [Required (ErrorMessage = "Please enter Department Name")]
     [StringLength(100)]
+    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
     public string Dept_Name { get; set; }
 }
 }

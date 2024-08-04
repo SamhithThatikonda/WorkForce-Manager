@@ -46,9 +46,6 @@ namespace Application.Controllers
                 await _dbContext.Employees.AddAsync(employee);
                 await _dbContext.SaveChangesAsync();
 
-                // Print the employee ID for the newly created row
-                Console.WriteLine($"New employee ID: {employee.Emp_Id}");
-
                 var salary = new SalaryClass
                 {
                     SalaryAmount = model.Employee.SalaryAmount,
@@ -108,7 +105,7 @@ namespace Application.Controllers
         public async Task<IActionResult> DeleteEmployee(EmployeeClass employee)
         {
             var employeeRemove = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == employee.Emp_Id);
-            Console.WriteLine($"Employee ID: {employee.Emp_Id}");
+
             if (employeeRemove != null)
             {
                 _dbContext.Employees.Remove(employeeRemove);

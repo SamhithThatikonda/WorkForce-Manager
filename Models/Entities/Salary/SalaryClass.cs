@@ -16,6 +16,8 @@ namespace Application.Models.Entities.Salary
 
     [Required]
     [Column(TypeName = "decimal(18, 2)")]
+    [RegularExpression(@"^\d+\.\d{0,2}$", ErrorMessage = "Invalid Salary Amount")]
+    [Range(0, 1000000)]
     public decimal SalaryAmount { get; set; }
 }
 }
