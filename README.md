@@ -64,8 +64,8 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
     dotnet ef database update "AuthMigrationFinal" 
     dotnet ef database update
     ```
-6. **For First Time Users**:(Optional)
-    Run the given `sqlquery.sql` file against the database.
+6. **For First Time Users (Optional)**:
+    Run the given `sqlquery.sql` file against the database on SQL-SERVER.
 
 7. **Run the application**:
     ```sh
