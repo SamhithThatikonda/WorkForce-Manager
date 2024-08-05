@@ -12,7 +12,8 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
 ## Libraries and Versions
 - **ASP.NET Core**: 6.0
 - **Bootstrap**: 5.1.3
-- **jQuery**: 3.6.0
+- **Microsoft.AspNetCore.Authentication.Cookies**: 2.2.0
+- **Microsoft.AspNetCore.Authorization**: 8.0.7
 - **Microsoft.jQuery.Unobtrusive.Validation**: 3.2.12
 - **Microsoft.jQuery.Unobtrusive.Ajax**: 3.2.6
 
@@ -39,7 +40,7 @@ For a detailed demonstration of the WorkForce-Manager application, please visit 
 ### Steps
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/yourusername/your-repo.git
+    gh repo clone SamhithThatikonda/WorkForce-Manager
     cd your-repo
     ```
 
