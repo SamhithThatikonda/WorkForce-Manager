@@ -6,8 +6,8 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
 ## Tech Stack
 - **Backend**: ASP.NET Core 6.0
 - **Frontend**: Razor Pages, Bootstrap 5.1.3
-- **Database**: SQL Server
-- **Tools**: Visual Studio Code, .NET CLI
+- **Database**: SQL Server (hosted on Azure Data Studio, in Docker using Image Container Instance)
+- **Tools**: Visual Studio Code, .NET CLI, Azure Data Studio, Docker
 
 ## Libraries and Versions
 - **ASP.NET Core**: 6.0
@@ -29,6 +29,7 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
 ### Prerequisites
 - [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [Docker](https://www.docker.com/get-started)
 
 ### Steps
 1. **Clone the repository**:
