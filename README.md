@@ -40,8 +40,7 @@ For a detailed demonstration of the WorkForce-Manager application, please visit 
 ### Steps
 1. **Clone the repository**:
     ```sh
-    gh repo clone SamhithThatikonda/WorkForce-Manager
-    cd your-repo
+        git repo clone SamhithThatikonda/WorkForce-Manager
     ```
 
 2. **Restore dependencies**:
