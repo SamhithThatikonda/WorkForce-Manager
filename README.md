@@ -24,6 +24,11 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
 5. **Data Validation**: Client-side and server-side validation using jQuery Unobtrusive Validation.
 6. **Ajax Support**: Asynchronous operations using jQuery Unobtrusive Ajax.
 
+## Project Demonstration
+For a detailed demonstration of the WorkForce-Manager application, please visit the following link:
+
+[Project Demo](https://drive.google.com/drive/folders/1Hnvwv8LaH3ZH0Q4WVEKuHNJFq1wdUvvS?usp=sharing)
+
 ## Installation
 
 ### Prerequisites
