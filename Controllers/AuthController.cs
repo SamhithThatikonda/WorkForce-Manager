@@ -117,6 +117,7 @@ namespace Application.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            TempData["Message"] = "Successfully Logged Out";
             return RedirectToAction("Login", "Auth");
         }
     } 
