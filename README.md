@@ -45,6 +45,12 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
 
 3. **Add required packages**:
     ```sh
+    dotnet add package Microsoft.EntityFrameworkCore
+    dotnet add package Microsoft.AspNetCore.Authentication.Cookies
+    dotnet add package Microsoft.AspNetCore.Authorization
+    dotnet add package Microsoft.Data.SqlClient
+    dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+    dotnet add package Microsoft.EntityFrameworkCore.Tools
     dotnet add package Microsoft.jQuery.Unobtrusive.Validation
     dotnet add package Microsoft.jQuery.Unobtrusive.Ajax
     ```
@@ -54,13 +60,21 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
 
 5. **Apply migrations and update the database**:
     ```sh
+    dotnet tool install --global dotnet-ef
+    dotnet ef database update "AuthMigrationFinal" 
     dotnet ef database update
     ```
+6. **For First Time Users**:(Optional)
+    Run the given `sqlquery.sql` file against the database.
 
-6. **Run the application**:
+7. **Run the application**:
     ```sh
+    dotnet build
     dotnet run
     ```
+8. **Default credentials**:
+    - Username: `21`
+    - Password: `123`
 
 ## Usage
 - Navigate to `http://localhost:5000` in your web browser.
