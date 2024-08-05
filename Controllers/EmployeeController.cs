@@ -121,6 +121,13 @@ namespace Application.Controllers
                 _dbContext.Salaries.Remove(salaryRemove);
                 await _dbContext.SaveChangesAsync();
             }
+
+            var AuthRemove = await _dbContext.Auths.FirstOrDefaultAsync(a => a.Emp_Id == employee.Emp_Id);
+            if (AuthRemove != null)
+            {
+                _dbContext.Auths.Remove(AuthRemove);
+                await _dbContext.SaveChangesAsync();
+            }
             return RedirectToAction("ListEmployee", "Employee");
         }
 
