@@ -1,10 +1,10 @@
-@{}
+@* @{}
 
 @model Application.Models.Entities.Department.DepartmentClass
 
-@* @{
+@{
     ViewBag.Title = "Edit Employee";
-} *@
+}
 
 @if (Model == null)
 {
@@ -37,6 +37,113 @@
 
 
 
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
+
+@* @model Application.Models.Entities.Department.DepartmentClass
+
+@{
+    ViewBag.Title = "Edit Department";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Edit Department</h3>
+
+                    @if (Model == null)
+                    {
+                        <p class="text-center text-danger">Department not found</p>
+                    }
+                    else
+                    {
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Department Id</label>
+                                <input type="text" class="form-control" asp-for="Dept_Id" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Department Name</label>
+                                <input type="text" class="form-control" asp-for="Dept_Name">
+                                <span asp-validation-for="Dept_Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <!-- Save Button -->
+                                <button type="submit" class="btn btn-primary w-100" name="action" value="Save">Save</button>
+                            </div>
+
+                            <div class="mb-3">
+                                <!-- Form for Deleting Department -->
+                                <form method="post" asp-action="DeleteDept" asp-controller="Dept" class="mb-0">
+                                    <input type="hidden" name="Dept_Id" value="@Model.Dept_Id">
+                                    <button type="submit" class="btn btn-danger w-100">Delete</button>
+                                </form>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
+
+
+@model Application.Models.Entities.Department.DepartmentClass
+
+@{
+    ViewBag.Title = "Edit Department";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center">Edit Department</h1>
+                </div>
+                <div class="card-body">
+                    @if (Model == null)
+                    {
+                        <p class="text-center text-danger">Department not found</p>
+                    }
+                    else
+                    {
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Department Id</label>
+                                <input type="text" class="form-control" asp-for="Dept_Id" readonly />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Department Name</label>
+                                <input type="text" class="form-control" asp-for="Dept_Name" />
+                                <span asp-validation-for="Dept_Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <!-- Save Button -->
+                                <button type="submit" class="btn btn-outline-primary w-100" name="action" value="Save">Save</button>
+
+                                <!-- Delete Button -->
+                                <button type="submit" class="btn btn-outline-danger w-100" name="action" value="Delete" formmethod="post" formaction="@Url.Action("DeleteDept", "Dept")" formnovalidate>Delete</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

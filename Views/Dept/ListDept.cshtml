@@ -2,30 +2,37 @@
 
 @model List<Application.Models.Entities.Department.DepartmentClass>
 
-<h1> All Departments </h1>
+@{
+    ViewBag.Title = "List Departments";
+}
 
-<table class ="table">
-    <thead>
-        <tr>
-            <th>Department Id</th>
-            <th> Department Name </th>
-            <th> <a class = "btn btn-primary" asp-controller = "Dept" asp-action = "AddDept"> Add </a> </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var deptrow in Model)
-        {
+<div class="container mt-4">
+    <h1 class="text-center">All Departments</h1>
+</div>
+
+<div class="table-container">
+    <table id="DeptTable" class ="table table-hover">
+        <thead class="table-light">
             <tr>
-                <td> @deptrow.Dept_Id </td>
-                <td> @deptrow.Dept_Name </td>
-                <td> 
-                    <a class = "btn btn-primary" asp-controller = "Dept" asp-action = "EditDept" asp-route-id = "@deptrow.Dept_Id"> Edit </a>
-                </td>
+                <th>Department Id</th>
+                <th> Department Name </th>
+                <th> <a class = "btn btn-outline-success" asp-controller = "Dept" asp-action = "AddDept"> Add </a> </th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var deptrow in Model)
+            {
+                <tr>
+                    <td> @deptrow.Dept_Id </td>
+                    <td> @deptrow.Dept_Name </td>
+                    <td> 
+                        <a class = "btn btn-outline-primary" asp-controller = "Dept" asp-action = "EditDept" asp-route-id = "@deptrow.Dept_Id"> Edit </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 

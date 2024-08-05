@@ -1,4 +1,4 @@
-@{}
+@* @{}
 
 @model Application.Models.Entities.Department.AddDeptModel
 
@@ -19,6 +19,44 @@
 </form>
 
 
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
+
+@model Application.Models.Entities.Department.AddDeptModel
+
+@{
+    ViewBag.Title = "Add Department";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center">Add Department</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Department Name</label>
+                            <input type="text" class="form-control" asp-for="Dept_Name" />
+                            <span asp-validation-for="Dept_Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <!-- Save Button -->
+                            <button type="submit" class="btn btn-outline-primary w-100">Save</button>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

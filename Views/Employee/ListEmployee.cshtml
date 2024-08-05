@@ -2,27 +2,33 @@
 
 @model List<Application.Models.Entities.Employee.EmployeeClass>
 
-<h1> All Employee </h1>
+<div class="container mt-4">
+    <h1 class="text-center">All Employees</h1>
+</div>
+@{
+    ViewBag.Title = "List Employees";
+}
 
-<table class ="table">
-    <thead>
+
+@* <table class ="table table-hover">
+    <thead class = "table-light">
         <tr>
-            <th>Employee Id</th>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> Department Id </th>
-            <th> <a class = "btn btn-primary" asp-controller = "Employee" asp-action = "AddEmployee"> Add </a> </th>
+            <th class="vertical-center">Employee Id</th>
+            <th class="vertical-center"> First Name </th>
+            <th class="vertical-center"> Last Name </th>
+            <th class="vertical-center"> Department Id </th>
+            <th> <a class = "btn btn-primary vertical-center" asp-controller = "Employee" asp-action = "AddEmployee"> Add </a> </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var employeerow in Model)
         {
             <tr>
-                <td> @employeerow.Emp_Id </td>
-                <td> @employeerow.First_Name </td>
-                <td> @employeerow.Last_Name </td>
-                <td> @employeerow.Dept_Id </td>
-                <td> 
+                <td class="vertical-center"> @employeerow.Emp_Id </td>
+                <td class="vertical-center"> @employeerow.First_Name </td>
+                <td class="vertical-center"> @employeerow.Last_Name </td>
+                <td class="vertical-center"> @employeerow.Dept_Id </td>
+                <td class="vertical-center"> 
                     <a class = "btn btn-primary" asp-controller = "Employee" asp-action = "EditEmployee" asp-route-id = "@employeerow.Emp_Id"> Edit </a>
                 </td>
             </tr>
@@ -34,4 +40,134 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
+
+@* <div class="table-container" style="max-height: 500px; overflow-y: auto;">
+    <table class="table table-hover">
+        <thead class="table-light sticky-header">
+            <tr>
+                <th class="vertical-center">Employee Id</th>
+                <th class="vertical-center">First Name</th>
+                <th class="vertical-center">Last Name</th>
+                <th class="vertical-center">Department Id</th>
+                <th>
+                    <a class="btn btn-primary vertical-center" asp-controller="Employee" asp-action="AddEmployee">Add</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employeerow in Model)
+            {
+                <tr>
+                    <td class="vertical-center">@employeerow.Emp_Id</td>
+                    <td class="vertical-center">@employeerow.First_Name</td>
+                    <td class="vertical-center">@employeerow.Last_Name</td>
+                    <td class="vertical-center">@employeerow.Dept_Id</td>
+                    <td class="vertical-center">
+                        <a class="btn btn-primary" asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@employeerow.Emp_Id">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-container {
+        position: relative;
+    }
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .table th, .table td {
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Table</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <style>
+        .table-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .table-container .dataTables_wrapper {
+            margin: 0 auto;
+            width: 100%;
+        }
+        /* Optional: Adjust the height of the pagination controls if needed */
+        .dataTables_wrapper .dataTables_paginate {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <table id="employeeTable" class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th class="vertical-center">Employee Id</th>
+                    <th class="vertical-center">First Name</th>
+                    <th class="vertical-center">Last Name</th>
+                    <th class="vertical-center">Department Id</th>
+                    <th>
+                        <a class="btn btn-outline-success vertical-center" asp-controller="Employee" asp-action="AddEmployee">Add</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employeerow in Model)
+                {   
+                    <tr>
+                        <td class="vertical-center">@employeerow.Emp_Id</td>
+                        <td class="vertical-center">@employeerow.First_Name</td>
+                        <td class="vertical-center">@employeerow.Last_Name</td>
+                        <td class="vertical-center">@employeerow.Dept_Id</td>
+                        <td class="vertical-center">
+                            <a class="btn btn-outline-primary" asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@employeerow.Emp_Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#employeeTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "pageLength": 10, // Number of entries per page
+                "lengthChange": false, // Hide the "Show entries" dropdown
+                "language": {
+                    "paginate": {
+                        "previous": "Prev",
+                        "next": "Next"
+                    }
+                },
+                "dom": '<"top"fi>rt<"bottom"lp><"clear">'
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

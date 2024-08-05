@@ -2,40 +2,59 @@
 
 @model Application.Models.Entities.Employee.AddEmployeeViewModel
 
-<h1> Add Employee </h1>
+@{
+    ViewBag.Title = "Add Employee";
+}
 
-<form asp-action="AddEmployee" method="post">
-    <div class = "mt-3">
-        <label class = "form-label" >First Name</label>
-        <input type = "text" class = "form-label" asp-validation-form="" asp-for="Employee.First_Name" />
-        <span asp-validation-for="Employee.First_Name" class="text-danger"></span>
+<div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-center">Add Employee</h1>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="AddEmployee" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" asp-for="Employee.First_Name" />
+                                <span asp-validation-for="Employee.First_Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" asp-for="Employee.Last_Name" />
+                                <span asp-validation-for="Employee.Last_Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Department Name</label>
+                                <div class="input-group">
+                                    <select asp-for="Employee.Dept_Id" class="form-select" asp-items="@(new SelectList(Model.Departments, "Dept_Id", "Dept_Name"))"></select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Salary</label>
+                                <input type="text" class="form-control" asp-for="Employee.SalaryAmount" />
+                                <span asp-validation-for="Employee.SalaryAmount" class="text-danger"></span>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-outline-primary w-100">Save</button>
+                            </div>
+                        </form>
+
+                        <div class="mt-3">
+                            <form asp-controller="Dept" asp-action="AddDeptFromEmployee" method="get">
+                                <button type="submit" class="btn btn-outline-primary w-100">Add Department</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class = "mt-3">
-        <label class = "form-label" > Last Name</label>
-        <input type = "text" class = "form-label" asp-for="Employee.Last_Name" />
-        <span asp-validation-for="Employee.Last_Name" class="text-danger"></span>
-    </div>
-
-    <div class = "mt-3">
-        <label class = "form-label">Department Name</label>
-        <select asp-for="Employee.Dept_Id" asp-items="@(new SelectList(Model.Departments, "Dept_Id", "Dept_Name"))"></select>
-    </div>
-
-    <div class = "mt-3">
-        <label class = "form-label">Salary</label>
-        <input type = "text" class = "form-label" asp-for="Employee.SalaryAmount" />
-        <span asp-validation-for="Employee.SalaryAmount" class="text-danger"></span>
-    </div>
-    <button type= "Submit" class = "btn btn-primary">Save</button>
-
-</form>
-   
- <div class="mt-3"></div>
-
-<form asp-controller = "Dept" asp-action="AddDeptFromEmployee" method="get">
-    <button type = "Submit" class = "btn btn-outline-primary">Add Department</button>
-</form>
 
 
 

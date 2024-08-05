@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2OJGb+bGJOgf1spG+qiUvXiVkx041of+q0wqmsjKgcE=",
+  "Hash": "BNCW77omL6Cq8ChrT+PBq5nEMXdV9cuyUSQ6UtVi1jc=",
   "Source": "Application",
   "BasePath": "_content/Application",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Users/samhith/Projects/Application/wwwroot/images/Logo.png",
+      "SourceId": "Application",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/samhith/Projects/Application/wwwroot/",
+      "BasePath": "_content/Application",
+      "RelativePath": "images/Logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/Logo.png"
     },
     {
       "Identity": "/Users/samhith/Projects/Application/wwwroot/js/site.js",

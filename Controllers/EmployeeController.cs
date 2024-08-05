@@ -104,10 +104,13 @@ namespace Application.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteEmployee(EmployeeClass employee)
         {
+            Console.WriteLine("testing");
+            Console.WriteLine(employee.Emp_Id);
             var employeeRemove = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Emp_Id == employee.Emp_Id);
 
             if (employeeRemove != null)
             {
+                Console.WriteLine("testing");
                 _dbContext.Employees.Remove(employeeRemove);
                 await _dbContext.SaveChangesAsync();
             }
