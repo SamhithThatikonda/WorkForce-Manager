@@ -93,19 +93,35 @@ WorkForce-Manager is a comprehensive application designed to manage employees, s
 - **ListEmployee**: Displays a list of all employees.
 - **AddEmployee**: Allows adding a new employee.
 - **EditEmployee**: Enables editing existing employee details.
-- **DeleteEmployee**: Facilitates the deletion of an employee.
+- **DeleteEmployee**: Employee Deletion with Cascading Effect
+
+The `DeleteEmployee` feature facilitates the removal of an employee. This action also triggers a cascading delete effect, ensuring that all related data in associated tables is removed. Specifically:
+
+- **Employee Deletion**: The specified employee is deleted from the `EmployeeTable`.
+- **Salary Deletion**: All salary records associated with the deleted employee are removed from the `SalaryTable`.
+- **Authorization Deletion**: All authorizations linked to the deleted employee are removed from the `AuthTable`.
+
+This cascading delete functionality maintains data integrity by ensuring that no orphaned records remain in the related tables.
 
 #### SalaryController
 - **ListSalary**: Shows a list of all salaries.
-- **AddSalary**: Allows adding a new salary record.
+<!-- - **AddSalary**: Allows adding a new salary record. -->
 - **EditSalary**: Enables editing existing salary details.
-- **DeleteSalary**: Facilitates the deletion of a salary record.
+<!-- - **DeleteSalary**: Facilitates the deletion of a salary record. -->
 
 #### DeptController
 - **ListDept**: Displays a list of all departments.
 - **AddDept**: Allows adding a new department.
 - **EditDept**: Enables editing existing department details.
-- **DeleteDept**: Facilitates the deletion of a department.
+- **DeleteDept**:Department Deletion with Cascading Effect
+
+The `DeleteDept` feature facilitates the removal of a department from the `DepartmentTable`. This action triggers a cascading delete effect, ensuring that all related data in associated tables is also removed. Specifically:
+
+- **Department Deletion**: The specified department is deleted from the `DepartmentTable`.
+- **Employee Deletion**: All employees associated with the deleted department are removed from the `EmployeeTable`.
+- **Salary Deletion**: All salary records linked to the deleted employees are removed from the `SalaryTable`.
+
+This cascading delete functionality maintains data integrity by ensuring that no orphaned records remain in the related tables.
 
 ## Use Case
 WorkForce-Manager is used for storing and retrieving employee information, managing salaries, and organizing departments within an organization. It provides a secure and efficient way to handle HR-related tasks.
