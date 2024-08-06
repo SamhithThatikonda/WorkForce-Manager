@@ -39,10 +39,21 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListDept()
+        public async Task<IActionResult> ListDept(int pg = 1)
         {
-            var alldepartments = await _dbContext.Departments.ToListAsync();
-            return View(alldepartments);
+            // var alldepartments = await _dbContext.Departments.ToListAsync();
+            // return View(alldepartments);
+
+            // Server side paging
+            int totalDepartmentsCount = await _dbContext.Departments.CountAsync();
+            int pageSize = 15;
+
+            var DeptRecords = await _dbContext.Departments.Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            var pager = new Pager(totalDepartmentsCount, pg, pageSize);
+            this.ViewBag.Pager = pager;
+
+            return View(DeptRecords);
         }
 
         [HttpGet]

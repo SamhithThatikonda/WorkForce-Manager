@@ -41,7 +41,6 @@ namespace Application.Controllers
 
             return View(SalariesRecords);
 
-
         }
 
         [HttpGet]
