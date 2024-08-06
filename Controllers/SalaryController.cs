@@ -9,6 +9,7 @@ using Application.Models.Entities.Department;
 using Application.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using Application.Models; 
 
 
 namespace Application.Controllers
@@ -23,11 +24,24 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListSalary()
+        public async Task<IActionResult> ListSalary(int pg = 1)
         {
-            var allSalaries = await _dbContext.Salaries.ToListAsync();
-            Console.WriteLine("All Salaries: ");
-            return View(allSalaries);
+            // var allSalaries = await _dbContext.Salaries.ToListAsync();
+            // Console.WriteLine("All Salaries: ");
+            // return View(allSalaries);
+
+            // Server side paging
+            int totalSalariesCount = await _dbContext.Salaries.CountAsync();
+            int pageSize = 15;
+
+            var SalariesRecords = await _dbContext.Salaries.Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            var pager = new Pager(totalSalariesCount, pg, pageSize);
+            this.ViewBag.Pager = pager;
+
+            return View(SalariesRecords);
+
+
         }
 
         [HttpGet]

@@ -7,6 +7,7 @@
 </div>
 @{
     ViewBag.Title = "List Salaries";
+    Pager pager = ViewBag.Pager ?? new Pager(0, 1);
 }
 <div class="table-container">
     <table id="salaryTable" class="table table-hover">
@@ -34,6 +35,45 @@
         </tbody>
     </table>
 </div>
+    <div class="container">
+
+        @if (pager.TotalPages > 0)
+        {
+
+            <ul class="pagination justify-content-end">
+
+                @* Adding the First and Previous Page buttons *@
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Salary/ListSalary?pg=1">First</a>
+                    </li>
+                    <li>
+                        <a class="page-link" href="/Salary/ListSalary?pg=@(pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                }
+
+                @* Adding the page numbers *@
+                @for (int i = pager.StartPage; i <= pager.EndPage; i++)
+                {
+                    <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="/Salary/ListSalary?pg=@i">@i</a>
+                    </li>
+                }
+
+                @* Adding the Next and Last Page buttons *@
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Salary/ListSalary?pg=@(pager.CurrentPage + 1)">Next</a>
+                    </li>
+                    <li>
+                        <a class="page-link" asp-controller="Salary" asp-action="ListSalary" asp-route-pg="@(pager.TotalPages)">Last</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
