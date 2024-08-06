@@ -143,3 +143,5 @@
 /Users/samhith/Projects/Application/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
 /Users/samhith/Projects/Application/bin/Debug/net8.0/System.Security.Permissions.dll
 /Users/samhith/Projects/Application/obj/Debug/net8.0/Application.sourcelink.json
+/Users/samhith/Projects/Application/bin/Debug/net8.0/PagedList.dll
+/Users/samhith/Projects/Application/bin/Debug/net8.0/PagedList.Mvc.dll

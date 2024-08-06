@@ -1,4 +1,4 @@
-@{}
+@* @{}
 
 @model List<Application.Models.Entities.Employee.EmployeeClass>
 
@@ -7,6 +7,15 @@
 </div>
 @{
     ViewBag.Title = "List Employees";
+
+    Pager pager = new Pager();
+
+    int pageNo = 1;
+    if (ViewBag.PageNo != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
 }
 
 <!DOCTYPE html>
@@ -61,6 +70,155 @@
         </table>
     </div>
 
+
+<div class = 'container'>
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+            @for (int i = pager.StartPage; i <= pager.EndPage; i++)
+            {
+                <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="/Employee/ListEmployee?pg=@i">@i</a>
+                    @* <a class="page-link" asp-controller = "Employee" asp-action = "ListEmployee" asp-route-pg = "@i">@i</a> *
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#employeeTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "pageLength": 10, // Number of entries per page
+                "lengthChange": false, // Hide the "Show entries" dropdown
+                "language": {
+                    "paginate": {
+                        "previous": "Prev",
+                        "next": "Next"
+                    }
+                },
+                "dom": '<"top"fi>rt<"bottom"lp><"clear">'
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>
+
+
+ *@
+
+@model List<Application.Models.Entities.Employee.EmployeeClass>
+
+@{
+    ViewBag.Title = "List Employees";
+
+    Pager pager = ViewBag.Pager ?? new Pager(0, 1); // Default initialization if pager is null
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">List of Employees</h1>
+</div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Table</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <style>
+        .table-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .table-container .dataTables_wrapper {
+            margin: 0 auto;
+            width: 100%;
+        }
+        /* Optional: Adjust the height of the pagination controls if needed */
+        .dataTables_wrapper .dataTables_paginate {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <table id="employeeTable" class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th class="vertical-center">Employee Id</th>
+                    <th class="vertical-center">First Name</th>
+                    <th class="vertical-center">Last Name</th>
+                    <th class="vertical-center">Department Id</th>
+                    <th>
+                        <a class="btn btn-outline-success vertical-center" asp-controller="Employee" asp-action="AddEmployee">Add</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employeerow in Model)
+                {   
+                    <tr>
+                        <td class="vertical-center">@employeerow.Emp_Id</td>
+                        <td class="vertical-center">@employeerow.First_Name</td>
+                        <td class="vertical-center">@employeerow.Last_Name</td>
+                        <td class="vertical-center">@employeerow.Dept_Id</td>
+                        <td class="vertical-center">
+                            <a class="btn btn-outline-primary" asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@employeerow.Emp_Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+
+        @if (pager.TotalPages > 0)
+        {
+
+            <ul class="pagination justify-content-end">
+
+                @* Adding the First and Previous Page buttons *@
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Employee/ListEmployee?pg=1">First</a>
+                    </li>
+                    <li>
+                        <a class="page-link" href="/Employee/ListEmployee?pg=@(pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                }
+
+                @* Adding the page numbers *@
+                @for (int i = pager.StartPage; i <= pager.EndPage; i++)
+                {
+                    <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="/Employee/ListEmployee?pg=@i">@i</a>
+                    </li>
+                }
+
+                @* Adding the Next and Last Page buttons *@
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Employee/ListEmployee?pg=@(pager.CurrentPage + 1)">Next</a>
+                    </li>
+                    <li>
+                        <a class="page-link" asp-controller="Employee" asp-action="ListEmployee" asp-route-pg="@(pager.TotalPages)">Last</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
@@ -83,6 +241,3 @@
     </script>
 </body>
 </html>
-
-
-

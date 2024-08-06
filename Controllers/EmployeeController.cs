@@ -9,7 +9,7 @@ using Application.Models.Entities.Department;
 using Application.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
-
+using Application.Models;
 
 namespace Application.Controllers
 {
@@ -59,10 +59,32 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListEmployee()
+        public async Task<IActionResult> ListEmployee(int pg = 1)
         {
-            var allemployees = await _dbContext.Employees.ToListAsync();
-            return View(allemployees);
+        //Client Side Pagination
+            // List<EmployeeClass> allemployees = await _dbContext.Employees.ToListAsync();
+
+            // const int pageSize = 10;
+            // int recsCount = allemployees.Count;
+            // var pager = new Pager(allemployees.Count, pg, pageSize);
+            // int recSkip = (pg - 1) * pageSize;
+
+            // var EmployeesData = allemployees.Skip(recSkip).Take(pageSize).ToList();
+            // this.ViewBag.Pager = pager;
+
+            // return View(EmployeesData);
+            // // return View(allemployees);
+
+        // Server Side Pagination
+            int totalEmployees = await _dbContext.Employees.CountAsync();
+            int pageSize = 15;
+
+            var employees = await _dbContext.Employees.Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            var pager = new Pager(totalEmployees, pg, pageSize);
+            this.ViewBag.Pager = pager;
+
+            return View(employees);
         }
 
         [HttpGet]
