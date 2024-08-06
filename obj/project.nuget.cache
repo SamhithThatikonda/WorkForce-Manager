@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ae5UZx/gTZ0=",
+  "dgSpecHash": "skjWeIzdsMM=",
   "success": true,
   "projectFilePath": "/Users/samhith/Projects/Application/Application.csproj",
   "expectedPackageFiles": [
@@ -88,6 +88,7 @@
     "/Users/samhith/.nuget/packages/system.diagnostics.eventlog/8.0.0/system.diagnostics.eventlog.8.0.0.nupkg.sha512",
     "/Users/samhith/.nuget/packages/system.identitymodel.tokens.jwt/6.35.0/system.identitymodel.tokens.jwt.6.35.0.nupkg.sha512",
     "/Users/samhith/.nuget/packages/system.io.pipelines/6.0.3/system.io.pipelines.6.0.3.nupkg.sha512",
+    "/Users/samhith/.nuget/packages/system.linq.dynamic.core/1.4.4/system.linq.dynamic.core.1.4.4.nupkg.sha512",
     "/Users/samhith/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
     "/Users/samhith/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
     "/Users/samhith/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
