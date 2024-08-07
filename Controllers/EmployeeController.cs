@@ -2,6 +2,7 @@ using Application.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq.Dynamic.Core;
 using Application.Data;
 using Application.Models.Entities.Salary;
 using Application.Models.Entities.Employee;
@@ -59,7 +60,7 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListEmployee(int pg = 1)
+        public async Task<IActionResult> ListEmployee(int pg = 1, string sortOrder = "Emp_Id")
         {
         //Client Side Pagination
             // List<EmployeeClass> allemployees = await _dbContext.Employees.ToListAsync();
@@ -76,13 +77,17 @@ namespace Application.Controllers
             // // return View(allemployees);
 
         // Server Side Pagination
+        Console.WriteLine("testing");
+        Console.WriteLine(pg);
+        Console.WriteLine(sortOrder);
             int totalEmployees = await _dbContext.Employees.CountAsync();
             int pageSize = 15;
 
-            var employees = await _dbContext.Employees.Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
+            var employees = await _dbContext.Employees.OrderBy(sortOrder).Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
 
             var pager = new Pager(totalEmployees, pg, pageSize);
             this.ViewBag.Pager = pager;
+            this.ViewBag.SortOrder = sortOrder;
 
             return View(employees);
         }

@@ -145,3 +145,4 @@
 /Users/samhith/Projects/Application/obj/Debug/net8.0/Application.sourcelink.json
 /Users/samhith/Projects/Application/bin/Debug/net8.0/PagedList.dll
 /Users/samhith/Projects/Application/bin/Debug/net8.0/PagedList.Mvc.dll
+/Users/samhith/Projects/Application/bin/Debug/net8.0/System.Linq.Dynamic.Core.dll
