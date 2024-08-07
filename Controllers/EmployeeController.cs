@@ -62,24 +62,11 @@ namespace Application.Controllers
         [HttpGet]
         public async Task<IActionResult> ListEmployee(int pg = 1, string sortOrder = "Emp_Id")
         {
-        //Client Side Pagination
-            // List<EmployeeClass> allemployees = await _dbContext.Employees.ToListAsync();
-
-            // const int pageSize = 10;
-            // int recsCount = allemployees.Count;
-            // var pager = new Pager(allemployees.Count, pg, pageSize);
-            // int recSkip = (pg - 1) * pageSize;
-
-            // var EmployeesData = allemployees.Skip(recSkip).Take(pageSize).ToList();
-            // this.ViewBag.Pager = pager;
-
-            // return View(EmployeesData);
-            // // return View(allemployees);
 
         // Server Side Pagination
-        Console.WriteLine("testing");
-        Console.WriteLine(pg);
-        Console.WriteLine(sortOrder);
+        // Console.WriteLine("testing");
+        // Console.WriteLine(pg);
+        // Console.WriteLine(sortOrder);
             int totalEmployees = await _dbContext.Employees.CountAsync();
             int pageSize = 15;
 

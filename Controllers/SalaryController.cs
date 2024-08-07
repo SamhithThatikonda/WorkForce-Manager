@@ -1,7 +1,9 @@
 using Application.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
+using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core;
+using System.Linq;
 using Application.Data;
 using Application.Models.Entities.Salary;
 using Application.Models.Entities.Employee;
@@ -24,7 +26,7 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListSalary(int pg = 1)
+        public async Task<IActionResult> ListSalary(int pg = 1, string sortOrder = "Sal_Id")
         {
             // var allSalaries = await _dbContext.Salaries.ToListAsync();
             // Console.WriteLine("All Salaries: ");
@@ -34,10 +36,12 @@ namespace Application.Controllers
             int totalSalariesCount = await _dbContext.Salaries.CountAsync();
             int pageSize = 15;
 
-            var SalariesRecords = await _dbContext.Salaries.Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            var SalariesRecords = await _dbContext.Salaries.OrderBy(sortOrder).Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync(); 
 
             var pager = new Pager(totalSalariesCount, pg, pageSize);
             this.ViewBag.Pager = pager;
+            this.ViewBag.SortOrder = sortOrder;
 
             return View(SalariesRecords);
 
