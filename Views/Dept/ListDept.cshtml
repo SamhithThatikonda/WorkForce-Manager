@@ -5,10 +5,21 @@
 @{
     ViewBag.Title = "List Departments";
     Pager pager = ViewBag.Pager ?? new Pager(0, 1);
+    string sortedOrder = ViewBag.SortOrder ?? "Dept_Id";
 }
 
 <div class="container mt-4">
     <h1 class="text-center">List of Departments</h1>
+</div>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Sort By
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/Dept/ListDept?pg=@pager.CurrentPage&sortOrder=Dept_Id">Department Id</a></li>
+        <li><a class="dropdown-item" href="/Dept/ListDept?pg=@pager.CurrentPage&sortOrder=Dept_Name">Department Name</a></li>
+    </ul>
 </div>
 
 <div class="table-container">
@@ -46,10 +57,10 @@
             @if (pager.CurrentPage > 1)
             {
                 <li class="page-item">
-                    <a class="page-link" href="/Dept/ListDept?pg=1">First</a>
+                    <a class="page-link" href="/Dept/ListDept?pg=1&sortOrder=@sortedOrder">First</a>
                 </li>
                 <li>
-                    <a class="page-link" href="/Dept/ListDept?pg=@(pager.CurrentPage - 1)">Previous</a>
+                    <a class="page-link" href="/Dept/ListDept?pg=@(pager.CurrentPage - 1)&sortOrder=@sortedOrder">Previous</a>
                 </li>
             }
 
@@ -57,7 +68,7 @@
             @for (int i = pager.StartPage; i <= pager.EndPage; i++)
             {
                 <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
-                    <a class="page-link" href="/Dept/ListDept?pg=@i">@i</a>
+                    <a class="page-link" href="/Dept/ListDept?pg=@i&sortOrder=@sortedOrder">@i</a>
                 </li>
             }
 
@@ -65,10 +76,10 @@
             @if (pager.CurrentPage < pager.TotalPages)
             {
                 <li class="page-item">
-                    <a class="page-link" href="/Dept/ListDept?pg=@(pager.CurrentPage + 1)">Next</a>
+                    <a class="page-link" href="/Dept/ListDept?pg=@(pager.CurrentPage + 1)&sortOrder=@sortedOrder">Next</a>
                 </li>
                 <li>
-                    <a class="page-link" asp-controller="Dept" asp-action="ListDept" asp-route-pg="@(pager.TotalPages)">Last</a>
+                    <a class="page-link" asp-controller="Dept" asp-action="ListDept" asp-route-pg="@(pager.TotalPages)" asp-route-sortOrder = "@sortedOrder">Last</a>
                 </li>
             }
         </ul>

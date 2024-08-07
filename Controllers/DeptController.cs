@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Application.Data;
+using System.Linq.Dynamic.Core;
+using System.Linq;
+using System.Linq.Dynamic;
 using Application.Models.Entities.Employee;
 using Application.Models.Entities.Department;
 using Application.Models;
@@ -39,19 +42,21 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListDept(int pg = 1)
+        public async Task<IActionResult> ListDept(int pg = 1, string sortOrder = "Dept_Id")
         {
             // var alldepartments = await _dbContext.Departments.ToListAsync();
             // return View(alldepartments);
 
             // Server side paging
+            Console.WriteLine("Sort Order: " + sortOrder);
             int totalDepartmentsCount = await _dbContext.Departments.CountAsync();
             int pageSize = 15;
 
-            var DeptRecords = await _dbContext.Departments.Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
+            var DeptRecords = await _dbContext.Departments.OrderBy(sortOrder).Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
 
             var pager = new Pager(totalDepartmentsCount, pg, pageSize);
             this.ViewBag.Pager = pager;
+            this.ViewBag.SortOrder = sortOrder;
 
             return View(DeptRecords);
         }
