@@ -4,6 +4,7 @@ using Application.Models.Entities.Employee;
 using Application.Models.Entities.Salary;
 using Application.Models.Entities.Department;
 using Application.Models.Entities.Auth;
+using Application.Models;
 
 namespace Application.Data
 {
@@ -19,6 +20,7 @@ namespace Application.Data
     public DbSet<DepartmentClass> Departments { get; set; }
 
     public DbSet<AuthClass> Auths { get; set; }
+    public DbSet<RoleClass> Roles { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -27,8 +29,8 @@ namespace Application.Data
         modelBuilder.Entity<EmployeeClass>(entity =>
         {
             entity.HasKey(e => e.Emp_Id);
-            entity.Property(e => e.First_Name).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.Last_Name).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.First_Name).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Last_Name).IsRequired().HasMaxLength(200);
             entity.HasOne(e => e.DepartmentObject)
                   .WithMany()
                   .HasForeignKey(e => e.Dept_Id);
@@ -60,6 +62,17 @@ namespace Application.Data
             entity.HasKey(a => a.Emp_Id);
             entity.Property(a => a.Password).IsRequired().HasMaxLength(100);
             entity.ToTable("AuthTable");
+        });
+
+        // Configure Role entity
+        modelBuilder.Entity<RoleClass>(entity =>
+        {
+            entity.HasKey(r => r.Role_Id);
+            entity.Property(r => r.Role_Name).IsRequired().HasMaxLength(100);
+            entity.HasOne(r => r.EmployeeObject)
+                    .WithMany()
+                    .HasForeignKey(r => r.Emp_Id);
+            entity.ToTable("RoleTable");
         });
     }
 }

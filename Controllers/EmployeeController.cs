@@ -10,7 +10,7 @@ using Application.Models.Entities.Department;
 using Application.Models;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
-using Application.Models;
+using System.Threading.Tasks;
 
 namespace Application.Controllers
 {
@@ -50,7 +50,8 @@ namespace Application.Controllers
                 var salary = new SalaryClass
                 {
                     SalaryAmount = model.Employee.SalaryAmount,
-                    Emp_Id = employee.Emp_Id
+                    Emp_Id = employee.Emp_Id,
+                    timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff")
                 };
 
                 await _dbContext.Salaries.AddAsync(salary);
@@ -63,13 +64,12 @@ namespace Application.Controllers
         public async Task<IActionResult> ListEmployee(int pg = 1, string sortOrder = "Emp_Id")
         {
 
-        // Server Side Pagination
+        // Server Side Paginationd
         // Console.WriteLine("testing");
         // Console.WriteLine(pg);
         // Console.WriteLine(sortOrder);
             int totalEmployees = await _dbContext.Employees.CountAsync();
             int pageSize = 15;
-
             var employees = await _dbContext.Employees.OrderBy(sortOrder).Skip((pg - 1) * pageSize).Take(pageSize).ToListAsync();
 
             var pager = new Pager(totalEmployees, pg, pageSize);

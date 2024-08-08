@@ -28,6 +28,7 @@
                 <th>Salary Id</th>
                 <th>Employee Id</th>
                 <th> Salary </th>
+                <th>Time Stamp </th>
                 <th> Edit Action </th>
                 @* <th> <a class = "btn btn-primary" asp-controller = "Dept" asp-action = "AddDept"> Add </a> </th> *@
             </tr>
@@ -39,6 +40,7 @@
                     <td> @salrow.Sal_Id </td>
                     <td> @salrow.Emp_Id </td>
                     <td> @salrow.SalaryAmount </td>
+                    <td> @salrow.timestamp</td>
                     <td> 
                         <a class = "btn btn-outline-primary" asp-controller = "Salary" asp-action = "EditSalary" asp-route-id = "@salrow.Sal_Id"> Edit </a>
                     </td>

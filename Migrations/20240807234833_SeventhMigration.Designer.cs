@@ -3,6 +3,7 @@ using Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240807234833_SeventhMigration")]
+    partial class SeventhMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,13 +73,13 @@ namespace Application.Migrations
 
                     b.Property<string>("First_Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Last_Name")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Emp_Id");
 
@@ -98,10 +101,6 @@ namespace Application.Migrations
 
                     b.Property<decimal>("SalaryAmount")
                         .HasColumnType("decimal(18, 2)");
-
-                    b.Property<string>("timestamp")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Sal_Id");
 
@@ -128,8 +127,6 @@ namespace Application.Migrations
 
                     b.HasKey("Role_Id");
 
-                    b.HasIndex("Emp_Id");
-
                     b.ToTable("RoleTable", (string)null);
                 });
 
@@ -145,17 +142,6 @@ namespace Application.Migrations
                 });
 
             modelBuilder.Entity("Application.Models.Entities.Salary.SalaryClass", b =>
-                {
-                    b.HasOne("Application.Models.Entities.Employee.EmployeeClass", "EmployeeObject")
-                        .WithMany()
-                        .HasForeignKey("Emp_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EmployeeObject");
-                });
-
-            modelBuilder.Entity("Application.Models.RoleClass", b =>
                 {
                     b.HasOne("Application.Models.Entities.Employee.EmployeeClass", "EmployeeObject")
                         .WithMany()

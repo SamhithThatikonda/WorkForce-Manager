@@ -71,6 +71,9 @@
                         <td class="vertical-center">
                             <a class="btn btn-outline-primary" asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@employeerow.Emp_Id">Edit</a>
                         </td>
+                        <td class="vertical-center">
+                            <a class="btn btn-outline-primary" href="/Salary/EditSalary1?id=@employeerow.Emp_Id"> Payable </a>
+                        </td>
                     </tr>
                 }
             </tbody>
